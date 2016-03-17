@@ -39,3 +39,5 @@ resolv_conf: "/etc/resolv.conf"
 networking_path: "/etc/sysconfig/network-scripts"
 networking_eth: "redhat-ifcfg-eth.j2"
 networking_bond: "redhat-ifcfg-bond.j2"
+
+java_version: 8

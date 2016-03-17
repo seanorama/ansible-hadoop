@@ -41,6 +41,12 @@
   selinux: state=disabled
   when: ansible_os_family == "RedHat"
 
+- name: Install Java (Redhat)
+  yum: name={{item}} state=present
+  with_items:
+    - java-1.{{java_version}}.0-openjdk-devel
+  when: java_type == "open" open ansible_os_family == "RedHat" 
+
 - include: spark_stack.yml
   when: spark_stack and ansible_os_family == "RedHat" and ansible_distribution_major_version == "7"
 

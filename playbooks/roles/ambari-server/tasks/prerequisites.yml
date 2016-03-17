@@ -22,6 +22,11 @@
 
 - name: Run Ambari Server setup
   shell: /usr/sbin/ambari-server setup -s
+  when java_type == "oracle" or java_type is undefined
+
+- name: Run Ambari Server setup with OpenJDK
+  shell: /usr/sbin/ambari-server setup -s -j /etc/alternatives/java_sdk
+  when java_type == "open"
 
 - name: because packaging is hard
   copy: src=ambari-server.service  dest=/usr/lib/systemd/system/ambari-server.service
