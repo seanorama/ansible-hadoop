@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-export AWS_ACCESS_KEY_ID="$(grep -i AWS_ACCESS_KEY_ID ~/.aws/credentials | cut -d= -f2 | xargs)"
-export AWS_SECRET_ACCESS_KEY="$(grep -i AWS_SECRET_ACCESS_KEY ~/.aws/credentials | cut -d= -f2 | xargs)"
+#export AWS_ACCESS_KEY_ID="$(grep -i AWS_ACCESS_KEY_ID ~/.aws/credentials | cut -d= -f2 | xargs)"
+#export AWS_SECRET_ACCESS_KEY="$(grep -i AWS_SECRET_ACCESS_KEY ~/.aws/credentials | cut -d= -f2 | xargs)"
 
 aws_region=$(grep aws_region playbooks/group_vars/all|cut -d"'" -f2)
 cluster_name=$(grep cluster_name playbooks/group_vars/all|cut -d"'" -f2)
