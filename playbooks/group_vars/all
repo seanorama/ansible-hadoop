@@ -17,6 +17,7 @@ custom_blueprint: false
 admin_password: 'admin'
 services_password: 'AsdQwe123'
 alerts_contact: 'root@localhost.localdomain'
+firewall: true
 
 spark_stack: false
 spark_stack_config:
