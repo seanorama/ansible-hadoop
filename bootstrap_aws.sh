@@ -22,6 +22,8 @@ cache_max_age = 1
 destination_variable = public_dns_name
 vpc_destination_variable = ip_address
 
+elasticache = False
+rds = False
 route53 = False
 all_instances = False
 all_rds_instances = False
