@@ -6,11 +6,11 @@
 aws_region=$(grep aws_region playbooks/group_vars/all|cut -d"'" -f2)
 cluster_name=$(grep cluster_name playbooks/group_vars/all|cut -d"'" -f2)
 
-# Uncomment this for Ubuntu Builds
-# ansible_user="ubuntu"
-
-# Uncomment this for Redhat/CentOS builds
-ansible_user="ec2-user"
+# Set from the environment before running, or uncomment below
+ansible_user=${ansible_user:-centos}
+#ansible_user=centos" ## CentOS
+#ansible_user="ubuntu" ## Ubuntu
+#ansible_user="ec2-user" ## Amazon Linux, RedHat
 
 cat > inventory/ec2.ini <<EOL
 [ec2]
