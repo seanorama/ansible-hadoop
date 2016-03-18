@@ -38,4 +38,4 @@ group_by_tag_keys = True
 group_by_security_group = True
 EOL
 
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook  -e "ansible_user=$ansible_user" -i inventory/ec2.py playbooks/bootstrap_aws.yml
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook  -e "cluster_interface=eth0 ansible_user=$ansible_user" -i inventory/ec2.py playbooks/bootstrap_aws.yml
