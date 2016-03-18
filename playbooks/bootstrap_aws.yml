@@ -33,7 +33,7 @@
         groups: slave-nodes, hadoop-cluster
       with_flattened:
         - "{{ groups['tag_group_slave_nodes'] }}"
-
+      when: groups['tag_group_slave_nodes'] is defined
 
 - name: "Add nodes to edge group"
   hosts: localhost
@@ -51,6 +51,7 @@
         groups: edge-nodes, hadoop-cluster
       with_flattened:
         - "{{ groups['tag_group_edge_nodes'] }}"
+      when: groups['tag_group_edge_nodes'] is defined
 
 - name: "Show debug info"
   hosts: hadoop-cluster
