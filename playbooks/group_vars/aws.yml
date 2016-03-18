@@ -1,0 +1,6 @@
+---
+data_disks_devices: []
+cluster_interface: eth0
+
+os:
+  update_firewall: false
