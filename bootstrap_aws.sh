@@ -20,7 +20,7 @@ instance_filters = tag:environment=${cluster_name}
 cache_path = ~/.ansible/tmp
 cache_max_age = 1
 destination_variable = public_dns_name
-vpc_destination_variable = ip_address
+vpc_destination_variable = private_ip_address
 
 elasticache = False
 rds = False
@@ -38,4 +38,4 @@ group_by_tag_keys = True
 group_by_security_group = True
 EOL
 
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook  -e "cluster_interface=eth0 ansible_user=$ansible_user" -i inventory/ec2.py playbooks/bootstrap_aws.yml
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook  -e "cluster_interface=eth0 ansible_user=${ansible_user}" -i inventory/ec2.py playbooks/bootstrap_aws.yml
