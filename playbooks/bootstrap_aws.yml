@@ -1,8 +1,4 @@
 ---
-- name: load infrastucture_provider specific variables
-  include_vars: "{{ item }}.yml"
-  when: infrastucture_provider is defined
-
 - name: "Add nodes to master group"
   hosts: localhost
   connection: local
