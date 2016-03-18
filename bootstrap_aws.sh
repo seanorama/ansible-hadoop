@@ -4,7 +4,7 @@
 #export AWS_SECRET_ACCESS_KEY="$(grep -i AWS_SECRET_ACCESS_KEY ~/.aws/credentials | cut -d= -f2 | xargs)"
 
 aws_region=$(grep aws_region playbooks/group_vars/all|cut -d"'" -f2)
-cluster_name=$(grep cluster_name playbooks/group_vars/all|cut -d"'" -f2)
+cluster_name=${cluster_name:-$(grep cluster_name playbooks/group_vars/all|cut -d"'" -f2)}
 
 # Set from the environment before running, or uncomment below
 ansible_user=${ansible_user:-centos}
