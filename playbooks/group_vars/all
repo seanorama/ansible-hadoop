@@ -18,9 +18,6 @@ admin_password: 'admin'
 services_password: 'AsdQwe123'
 alerts_contact: 'root@localhost.localdomain'
 
-os:
-  update_firewall: true
-
 
 spark_stack: false
 spark_stack_config:
