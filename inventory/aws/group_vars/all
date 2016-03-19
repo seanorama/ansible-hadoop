@@ -1,0 +1,6 @@
+---
+aws_vpc_cidr_block: '172.23.0.0/16'
+aws_region: us-east-1
+#aws_credentials_file: '~/.aws/credentials'
+
+cluster_interface: eth0

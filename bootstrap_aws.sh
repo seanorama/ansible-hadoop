@@ -3,16 +3,18 @@
 #export AWS_ACCESS_KEY_ID="$(grep -i AWS_ACCESS_KEY_ID ~/.aws/credentials | cut -d= -f2 | xargs)"
 #export AWS_SECRET_ACCESS_KEY="$(grep -i AWS_SECRET_ACCESS_KEY ~/.aws/credentials | cut -d= -f2 | xargs)"
 
-aws_region=$(grep aws_region playbooks/group_vars/all|cut -d"'" -f2)
+aws_region=$(awk -F": " '$1 == "aws_region" {print $2;exit;}' inventory/aws/group_vars/all)
 cluster_name=${cluster_name:-$(grep cluster_name playbooks/group_vars/all|cut -d"'" -f2)}
+vpc_destination_variable=${destination_veriable:-ip_address} ## easy override
 
 # Set from the environment before running, or uncomment below
-ansible_user=${ansible_user:-centos}
+ansible_user=${ansible_user:-ec2-user}
 #ansible_user=centos" ## CentOS
 #ansible_user="ubuntu" ## Ubuntu
 #ansible_user="ec2-user" ## Amazon Linux, RedHat
 
-cat > inventory/ec2.ini <<EOL
+
+cat > inventory/aws/ec2.ini <<EOL
 [ec2]
 regions = ${aws_region}
 regions_exclude =
@@ -20,7 +22,7 @@ instance_filters = tag:environment=${cluster_name}
 cache_path = ~/.ansible/tmp
 cache_max_age = 1
 destination_variable = public_dns_name
-vpc_destination_variable = private_ip_address
+vpc_destination_variable = ip_address
 
 elasticache = False
 rds = False
@@ -38,4 +40,4 @@ group_by_tag_keys = True
 group_by_security_group = True
 EOL
 
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -e "cluster_interface=eth0 ansible_user=${ansible_user} os.firewall=false data_disks_devices=[]" -i inventory/ec2.py playbooks/bootstrap_aws.yml
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -e "ansible_user=${ansible_user}" -i inventory/aws/ playbooks/bootstrap_aws.yml -vvvv

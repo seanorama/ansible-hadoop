@@ -1,0 +1,30 @@
+########################################################################
+## Don't touch this section. ###########################################
+##   It's required to inherit the dynamic groups from ec2.py ###########
+########################################################################
+
+[aws]
+*
+
+[tag_group_master_nodes]
+
+[tag_group_slave_nodes]
+
+[tag_group_edge_nodes]
+
+[hadoop-cluster:children]
+master-nodes
+slave-nodes
+edge-nodes
+
+[master-nodes:children]
+tag_group_master_nodes
+
+
+[slave-nodes:children]
+tag_group_slave_nodes
+
+
+[edge-nodes:children]
+tag_group_edge_nodes
+

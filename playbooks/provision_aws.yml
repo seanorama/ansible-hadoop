@@ -3,13 +3,13 @@
   hosts: localhost
   connection: local
   gather_facts: False
+  vars_files: [  "../inventory/aws/group_vars/all" ]
   tasks:
+
     - name: "Add the SSH keypair to our AWS region"
-      local_action:
-        module:  ec2_key
+      ec2_key:
         name: "{{ cloud_config.ssh.keyname }}"
         key_material: "{{ lookup('file', cloud_config.ssh.keyfile) }}"
-        region: "{{ cloud_config.aws_region }}"
 
     - name: "Create a VPC for our cluster in AWS"
       local_action:
@@ -17,9 +17,8 @@
         state: present
         multi_ok: no
         name: "VPC_for_{{ cluster_name }}"
-        cidr_block: "{{ cloud_config.aws_vpc_cidr_block }}"
+        cidr_block: "{{ aws_vpc_cidr_block }}"
         tags: { "environment" : "{{ cluster_name }}" }
-        region: "{{ cloud_config.aws_region }}"
       register: aws_vpc_info
 
     - name: "Create a Subnet for the VPC in AWS"
@@ -27,8 +26,7 @@
         module: ec2_vpc_subnet
         state: present
         vpc_id: "{{ aws_vpc_info.vpc.id }}"
-        cidr: "{{ cloud_config.aws_vpc_cidr_block }}"
-        region: "{{ cloud_config.aws_region }}"
+        cidr: "{{ aws_vpc_cidr_block }}"
         resource_tags:
           Name: "Subnet_for_{{ cluster_name }}"
       register: aws_vpc_subnet
@@ -38,7 +36,6 @@
         module: ec2_group
         state: present
         name: "hadoop-nodes"
-        region: "{{ cloud_config.aws_region }}"
         description: "Nodes for HDP cluster {{ cluster_name }}"
         vpc_id: "{{ aws_vpc_info.vpc.id }}"
         rules:
@@ -53,13 +50,12 @@
           - proto: all
             from_port: 1
             to_port:  65535
-            cidr_ip: "{{ cloud_config.aws_vpc_cidr_block }}"
+            cidr_ip: "{{ aws_vpc_cidr_block }}"
       register: aws_secgroup
 
     - name: "Add a Name Tag on security group in AWS"
       local_action:
         module: ec2_tag
-        region: "{{ cloud_config.aws_region }}"
         resource: "{{ aws_secgroup.group_id }}"
         state: present
         tags: { Name: "SG_for_{{ cluster_name }}" }
@@ -69,13 +65,11 @@
         module: ec2_vpc_igw
         vpc_id: "{{ aws_vpc_info.vpc.id }}"
         state: present
-        region: "{{ cloud_config.aws_region }}"
       register: aws_igw
 
     - name: "Add a Name Tag on internet gateway in AWS"
       local_action:
         module: ec2_tag
-        region: "{{ cloud_config.aws_region }}"
         resource: "{{ aws_igw.gateway_id }}"
         state: present
         tags: { Name: "IGW_for_{{ cluster_name }}" }
@@ -84,7 +78,6 @@
       local_action:
         module: ec2_vpc_route_table
         vpc_id: "{{ aws_vpc_info.vpc.id }}"
-        region: "{{ cloud_config.aws_region }}"
         state: present
         tags:
           Name: "RT_for_{{ cluster_name }}"
@@ -97,7 +90,7 @@
 
 
     - name: "Include master-nodes group variables"
-      include_vars: group_vars/master-nodes
+      include_vars: ../inventory/aws/group_vars/master-nodes
 
     - name: "Create master nodes on AWS as EC2 instances"
       local_action:
@@ -108,7 +101,6 @@
         image: "{{ aws_image }}"
         count: "{{ aws_nodes_count }}"
         instance_type: "{{ aws_instance_type }}"
-        region: "{{ cloud_config.aws_region }}"
         key_name: "{{ cloud_config.ssh.keyname }}"
         group_id: "{{ aws_secgroup.group_id }}"
         state: present
@@ -132,7 +124,6 @@
     - name: "Add a Name Tag on master nodes in AWS"
       local_action:
         module: ec2_tag
-        region: "{{ cloud_config.aws_region }}"
         resource: "{{item.0 | join('') }}"
         state: present
         tags: { Name: "master-{{item.1.msg}}.{{ cloud_config.domain }}" }
@@ -143,7 +134,6 @@
     - name: "Create and Attach EBS Volumes for master nodes on AWS"
       local_action:
         module: ec2_vol
-        region: "{{ cloud_config.aws_region }}"
         volume_type: "{{ ebs_disks_type }}"
         volume_size: "{{ ebs_disks_size }}"
         instance: "{{ item[0].id }}"
@@ -156,7 +146,7 @@
 
 
     - name: "Include slave-nodes group variables"
-      include_vars: group_vars/slave-nodes
+      include_vars: ../inventory/aws/group_vars/slave-nodes
 
     - name: "Create slave nodes on AWS as EC2 instances"
       local_action:
@@ -167,7 +157,6 @@
         image: "{{ aws_image }}"
         count: "{{ aws_nodes_count }}"
         instance_type: "{{ aws_instance_type }}"
-        region: "{{ cloud_config.aws_region }}"
         key_name: "{{ cloud_config.ssh.keyname }}"
         group_id: "{{ aws_secgroup.group_id }}"
         state: present
@@ -191,7 +180,6 @@
     - name: "Add a Name Tag on slave nodes in AWS"
       local_action:
         module: ec2_tag
-        region: "{{ cloud_config.aws_region }}"
         resource: "{{item.0 | join('') }}"
         state: present
         tags: { Name: "slave-{{item.1.msg}}.{{ cloud_config.domain }}" }
@@ -202,7 +190,6 @@
     - name: "Create and Attach EBS Volumes for slave nodes on AWS"
       local_action:
         module: ec2_vol
-        region: "{{ cloud_config.aws_region }}"
         volume_type: "{{ ebs_disks_type }}"
         volume_size: "{{ ebs_disks_size }}"
         instance: "{{ item[0].id }}"
@@ -215,7 +202,7 @@
 
 
     - name: "Include edge-nodes group variables"
-      include_vars: group_vars/edge-nodes
+      include_vars: ../inventory/aws/group_vars/edge-nodes
 
     - name: "Create edge nodes on AWS as EC2 instances"
       local_action:
@@ -226,7 +213,6 @@
         image: "{{ aws_image }}"
         count: "{{ aws_nodes_count }}"
         instance_type: "{{ aws_instance_type }}"
-        region: "{{ cloud_config.aws_region }}"
         key_name: "{{ cloud_config.ssh.keyname }}"
         group_id: "{{ aws_secgroup.group_id }}"
         state: present
@@ -250,7 +236,6 @@
     - name: "Add a Name Tag on edge nodes in AWS"
       local_action:
         module: ec2_tag
-        region: "{{ cloud_config.aws_region }}"
         resource: "{{item.0 | join('') }}"
         state: present
         tags: { Name: "edge-{{item.1.msg}}.{{ cloud_config.domain }}" }
@@ -261,7 +246,6 @@
     - name: "Create and Attach EBS Volumes for edge nodes on AWS"
       local_action:
         module: ec2_vol
-        region: "{{ cloud_config.aws_region }}"
         volume_type: "{{ ebs_disks_type }}"
         volume_size: "{{ ebs_disks_size }}"
         instance: "{{ item[0].id }}"

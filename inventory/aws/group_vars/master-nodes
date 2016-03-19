@@ -1,0 +1,8 @@
+---
+aws_nodes_count: 2
+aws_image: 'ami-0d28fe66'
+aws_instance_type: 't2.large'
+build_ebs: false
+ebs_disks_size: 100
+ebs_disks_type: 'standard'
+ebs_disks_devices: []
