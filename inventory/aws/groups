@@ -12,6 +12,8 @@
 
 [tag_group_edge_nodes]
 
+[tag_role_ambari_node]
+
 [hadoop-cluster:children]
 master-nodes
 slave-nodes
@@ -28,3 +30,5 @@ tag_group_slave_nodes
 [edge-nodes:children]
 tag_group_edge_nodes
 
+[ambari-node]
+tag_role_ambari_node
