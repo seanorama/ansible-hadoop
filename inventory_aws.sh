@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 aws_region=$(awk -F": " '$1 == "aws_region" {print $2;exit;}' inventory/aws/group_vars/all)
-cluster_name=$(grep cluster_name playbooks/group_vars/all|cut -d"'" -f2)
+cluster_name=$(awk -F": " '$1 == "cluster_name" {print $2;exit;}' playbooks/group_vars/all)
 
-destination_variable=${destination:-ip_address} ## if connecting from within the VPC then:
+destination_variable=${destination_variable:-ip_address} ## if connecting from within the VPC then:
                                                 ##   export destination=private_ip_address
 
 cat > inventory/aws/ec2.ini <<EOL
@@ -32,3 +32,4 @@ group_by_tag_keys = True
 group_by_security_group = True
 EOL
 
+ANSIBLE_HOST_KEY_CHECKING=False ansible -e "ansible_user=${ansible_user}" -i inventory/aws/ --list-hosts all
