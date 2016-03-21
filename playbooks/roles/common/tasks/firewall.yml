@@ -20,6 +20,7 @@
 - name: Check if firewalld is installed
   command: rpm -q firewalld
   register: register_installed_firewalld
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "7"
 
 - name: Set firewalld rules between cluster nodes
   command: firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="{{ hostvars[item][['ansible_', hostvars[item]['cluster_interface']]|join]['ipv4']['address'] }}" accept'
