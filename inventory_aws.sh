@@ -10,7 +10,7 @@ cat > inventory/aws/ec2.ini <<EOL
 [ec2]
 regions = ${aws_region}
 regions_exclude =
-instance_filters = tag:environment:${cluster_name}
+instance_filters = tag:environment=${cluster_name}
 cache_path = ~/.ansible/tmp
 cache_max_age = 1
 destination_variable = ${destination_variable}
