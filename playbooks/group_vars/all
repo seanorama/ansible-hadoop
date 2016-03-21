@@ -1,5 +1,5 @@
 ---
-cluster_name: 'hadoop-poc'
+cluster_name: hadoop-poc
 hdp_version: '2.4'
 java_type: oracle
 custom_repo: false
