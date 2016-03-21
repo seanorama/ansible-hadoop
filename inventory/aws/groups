@@ -19,7 +19,6 @@ edge-nodes
 [master-nodes:children]
 tag_group_master_nodes
 
-
 [slave-nodes:children]
 tag_group_slave_nodes
 

@@ -9,4 +9,4 @@ ansible_user=${ansible_user:-ec2-user}
 #ansible_user="ubuntu" ## Ubuntu
 #ansible_user="ec2-user" ## Amazon Linux, RedHat
 
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -e "ansible_user=${ansible_user}" -i inventory/aws/ playbooks/bootstrap_aws.yml -vvvv
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -e "ansible_user=${ansible_user}" -i inventory/aws/ playbooks/bootstrap.yml -vvvv
