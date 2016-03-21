@@ -155,8 +155,10 @@
 - name: Set hosts file
   template: src=hosts.j2 dest=/etc/hosts mode=0644
 
-- include: firewall.yml
+- name: Configure firewall
+  include: firewall.yml
   when: cloud_nodes_count is defined and cloud_nodes_count > 0
 
-- include: partitioning.yml
+- name: Configure partitioning
+  include: partitioning.yml
   when: data_disks_devices is defined and data_disks_devices
