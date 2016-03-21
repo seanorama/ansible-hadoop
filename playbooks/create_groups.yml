@@ -18,7 +18,7 @@
         - "{{ groups['master-nodes']|default([]) }}"
         - "{{ groups['slave-nodes']|default([]) }}"
         - "{{ groups['edge-nodes']|default([]) }}"
-      when: ('hadoop-cluster' not in groups) or groups['hadoop-cluster']|length<1
+      when: "'hadoop-cluster' not in groups or groups['hadoop-cluster']|length < 1"
 
     - name: "Add the last masternode to ambari-node variable group"
       always_run: yes
@@ -31,5 +31,4 @@
         ansible_become_pass: "{{ hostvars[item].ansible_ssh_pass|default('') }}"
         groups: ambari-node
       with_items: "{{ groups['master-nodes']|sort|last }}"
-      when: ('ambari-node' not in groups) or groups['ambari-node']|length<1
-
+      when: "'ambari-node' not in groups or groups['ambari-node']|length < 1"

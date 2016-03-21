@@ -1,6 +1,7 @@
 packages:
   - python-simplejson
-  - python-httplib2
+  - python26-httplib2
+  - python27-httplib2
   - man
   - man-pages
   - vim-enhanced
@@ -33,5 +34,3 @@ resolv_conf: "/etc/resolv.conf"
 networking_path: "/etc/sysconfig/network-scripts"
 networking_eth: "redhat-ifcfg-eth.j2"
 networking_bond: "redhat-ifcfg-bond.j2"
-
-java_version: 8

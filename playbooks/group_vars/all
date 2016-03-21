@@ -17,6 +17,8 @@ custom_blueprint: false
 admin_password: 'admin'
 services_password: 'AsdQwe123'
 alerts_contact: 'root@localhost.localdomain'
+data_disks_filesystem: xfs
+configure_firewall: false
 
 
 spark_stack: false
