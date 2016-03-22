@@ -20,6 +20,8 @@ alerts_contact: 'root@localhost.localdomain'
 data_disks_filesystem: xfs
 configure_firewall: false
 
+hadoop:
+  create_cluster: true  ## Trigger 'Cluster Creation' in Ambari Server
 
 spark_stack: false
 spark_stack_config:
