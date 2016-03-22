@@ -109,6 +109,7 @@
        body=" {{ cluster_template.content | b64decode }}"
        body_format=raw
        status_code=200,201,202
+       retries=0
   when: hadoop.create_cluster is undefined or hadoop.create_cluster
 
 - name: Change Ambari admin user password
