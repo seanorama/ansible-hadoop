@@ -152,7 +152,7 @@
 
 - name: Set hosts file
   template: src=hosts.j2 dest=/etc/hosts mode=0644
-  when: update_hosts_file is not defined or update_hosts_file
+  when: update_etc_hosts is not defined or update_etc_hosts
 
 - name: Include firewall.yml
   include: firewall.yml
