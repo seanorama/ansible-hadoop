@@ -1,5 +1,6 @@
 ---
 cluster_name: hadoop-poc
+deploy_hadoop: true  ## Trigger 'Cluster Creation' in Ambari Server
 hdp_version: '2.4'
 java_type: oracle
 custom_repo: false
@@ -20,9 +21,6 @@ alerts_contact: 'root@localhost.localdomain'
 data_disks_filesystem: xfs
 configure_firewall: false
 update_etc_hosts: true
-
-hadoop:
-  create_cluster: true  ## Trigger 'Cluster Creation' in Ambari Server
 
 spark_stack: false
 spark_stack_config:
