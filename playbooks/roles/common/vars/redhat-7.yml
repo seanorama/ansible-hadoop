@@ -37,4 +37,4 @@ networking_path: "/etc/sysconfig/network-scripts"
 networking_eth: "redhat-ifcfg-eth.j2"
 networking_bond: "redhat-ifcfg-bond.j2"
 
-java_version: 8
+java_version: 8 ## only applicable if java_type=open
