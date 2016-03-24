@@ -128,6 +128,16 @@
   shell: echo never > /sys/kernel/mm/transparent_hugepage/enabled && echo never > /sys/kernel/mm/transparent_hugepage/defrag
   ignore_errors: true
 
+- name: Disable IPv6
+  sysctl: >
+    name={{ item }}
+    value=1
+    state=present
+  with_items:
+    - net.ipv6.conf.all.disable_ipv6
+    - net.ipv6.conf.default.disable_ipv6
+    - net.ipv6.conf.lo.disable_ipv6
+
 - name: Reconfigure resolv.conf domain
   lineinfile: dest={{ resolv_conf }}
               create=yes
