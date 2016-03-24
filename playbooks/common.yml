@@ -1,0 +1,8 @@
+---
+- name: "Apply the common role to all nodes"
+  hosts: all
+  any_errors_fatal: true
+  become: yes
+  roles:
+    - common
+    - ambari-common
