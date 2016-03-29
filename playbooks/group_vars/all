@@ -11,6 +11,7 @@ install_spark: true
 install_flume: true
 install_hbase: false
 install_storm: true
+install_slider: true
 install_kafka: true
 install_falcon: true
 tachyon_service: false

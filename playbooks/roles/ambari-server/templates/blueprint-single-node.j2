@@ -325,9 +325,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_slider == true -%}
         {
           "name" : "SLIDER"
         },
+        {% endif -%}
         {
           "name" : "ZOOKEEPER_SERVER"
         },

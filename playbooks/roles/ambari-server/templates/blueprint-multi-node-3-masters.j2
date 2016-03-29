@@ -379,9 +379,11 @@
           "name" : "FALCON_CLIENT"
         },
         {% endif -%}
+        {% if install_slider == true -%}
         {
           "name" : "SLIDER"
         },
+        {% endif -%}
         {
           "name" : "ZOOKEEPER_SERVER"
         },
@@ -479,9 +481,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_slider == true -%}
         {
           "name" : "SLIDER"
         },
+        {% endif -%}
         {% if spark_stack == true -%}
         {
           "name" : "SPARKS_CLIENT"
@@ -567,9 +571,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_slider == true -%}
         {
           "name" : "SLIDER"
         },
+        {% endif -%}
         {
           "name" : "ZOOKEEPER_SERVER"
         },
@@ -676,9 +682,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_slider == true -%}
         {
           "name" : "SLIDER"
         },
+        {% endif -%}
         {% if install_flume == true -%}
         {
           "name" : "FLUME_HANDLER"
@@ -758,9 +766,11 @@
           "name" : "FALCON_CLIENT"
         },
         {% endif -%}
+        {% if install_slider == true -%}
         {
           "name" : "SLIDER"
         },
+        {% endif -%}
         {
           "name" : "ZOOKEEPER_SERVER"
         },
