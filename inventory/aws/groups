@@ -18,6 +18,7 @@ edge-nodes
 
 [master-nodes:children]
 tag_group_master_nodes
+tag_role_ambari_node
 
 [slave-nodes:children]
 tag_group_slave_nodes
