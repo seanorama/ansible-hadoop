@@ -33,6 +33,8 @@
     {% endif -%}
     {
       "hdfs-site" : {
+        "dfs.namenode.name.dir" : "{% for disk in ansible_mounts if disk.mount | match("/grid/*") %}{{ disk.mount }}/hadoop/hdfs/nn{% if not loop.last %},{% endif %}{% else %}/hadoop/hdfs/nn{%- endfor %}",
+        "dfs.journalnode.edits.dir" : "{% for disk in ansible_mounts if disk.mount | match("/grid/*") %}{{ disk.mount }}/hadoop/hdfs/jn{% if not loop.last %},{% endif %}{% else %}/hadoop/hdfs/jn{%- endfor %}",
         "dfs.datanode.data.dir" : "{% for disk in ansible_mounts if disk.mount | match("/grid/*") %}{{ disk.mount }}/hadoop/hdfs/data{% if not loop.last %},{% endif %}{% else %}/hadoop/hdfs/data{%- endfor %}",
         {% if ansible_memtotal_mb > 59000 -%}
         "dfs.datanode.balance.bandwidthPerSec" : "12500000",
