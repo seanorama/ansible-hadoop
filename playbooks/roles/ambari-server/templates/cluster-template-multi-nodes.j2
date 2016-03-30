@@ -1,6 +1,7 @@
 {
   "blueprint" : "cluster_blueprint",
   "default_password" : "{{ services_password }}",
+  "config_recommendation_strategy" : "{{ ambari_blueprint_recommendation_strategy }}",
   "configurations" : [
   {% if install_smartsense == true -%}
     {
