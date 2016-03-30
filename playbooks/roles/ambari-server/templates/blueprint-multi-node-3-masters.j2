@@ -381,6 +381,11 @@
           "name" : "FALCON_CLIENT"
         },
         {% endif -%}
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -483,6 +488,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -589,6 +599,14 @@
         {
           "name" : "AMBARI_SERVER"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {
+          "name" : "HST_SERVER"
+        },
+        {% endif -%}
         {
           "name" : "METRICS_COLLECTOR"
         },
@@ -684,6 +702,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -766,6 +789,11 @@
         {% if install_falcon == true -%}
         {
           "name" : "FALCON_CLIENT"
+        },
+        {% endif -%}
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
         },
         {% endif -%}
         {% if install_slider == true -%}

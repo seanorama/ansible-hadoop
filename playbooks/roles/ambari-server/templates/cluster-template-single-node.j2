@@ -1,6 +1,26 @@
 {
   "blueprint" : "cluster_blueprint",
   "default_password" : "{{ services_password }}",
+  "configurations" : [
+  {% if install_smartsense == true -%}
+    {
+      "hst-server-conf": {
+        "properties" : {
+          "customer.account.name" : "{{ smartsense_customer_name }}",
+          "customer.smartsense.id" : "{{ smartsense_customer_id }}",
+          "customer.notification.email" : "{{ smartsense_customer_email }}",
+          "server.storage.dir" : "/var/lib/smartsense/hst-server/data",
+          "server.tmp.dir" : "/var/lib/smartsense/hst-server/tmp"
+        }
+      },
+      "hst-agent-conf": {
+        "properties" : {
+          "agent.tmp_dir" : "/var/lib/smartsense/hst-agent/data/tmp"
+        }
+      }
+    }
+  {% endif -%}
+  ],
   "host_groups" :[
     {
       "name" : "single_node",

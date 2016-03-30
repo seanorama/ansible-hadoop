@@ -376,6 +376,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -505,6 +510,14 @@
         {
           "name" : "AMBARI_SERVER"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {
+          "name" : "HST_SERVER"
+        },
+        {% endif -%}
         {
           "name" : "APP_TIMELINE_SERVER"
         },
@@ -595,6 +608,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -717,6 +735,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -796,6 +819,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"

@@ -368,6 +368,11 @@
           "name" : "TACHYON_CLIENT"
         },
         {% endif -%}
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {% endif -%}
         {% if install_spark == true -%}
         {
           "name" : "SPARK_CLIENT"
@@ -448,6 +453,11 @@
         {% if install_flume == true -%}
         {
           "name" : "FLUME_HANDLER"
+        },
+        {% endif -%}
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
         },
         {% endif -%}
         {% if spark_stack == true -%}
@@ -536,6 +546,14 @@
         {
           "name" : "AMBARI_SERVER"
         },
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {
+          "name" : "HST_SERVER"
+        },
+        {% endif -%}
         {
           "name" : "APP_TIMELINE_SERVER"
         },
