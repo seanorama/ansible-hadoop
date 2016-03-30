@@ -50,3 +50,10 @@ cloud_config:
 
 # set to true to show host variables
 debug: false
+
+## for Hortonworks fork
+install_smartsense: true
+smartsense_customer_id: A-00000000-C-00000000
+smartsense_customer_name: 'Hortonworks Data Platform AWS Marketplace'
+smartsense_customer_email: 'aws-marketplace@hortonworks.com'
+
