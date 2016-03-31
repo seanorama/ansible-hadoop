@@ -30,5 +30,5 @@
         ansible_become_user: root
         ansible_become_pass: "{{ hostvars[item].ansible_ssh_pass|default('') }}"
         groups: ambari-node
-      with_items: "{{ groups['master-nodes']|sort|last }}"
+      with_items: "{{ groups['master-nodes'][-1] }}"
       when: "'ambari-node' not in groups or groups['ambari-node']|length < 1"

@@ -26,7 +26,7 @@
     {% if groups['slave-nodes']|length > 0 and not (groups['slave-nodes']|length == 1 and groups['master-nodes']|length == 2) -%}
     {
       "name" : "slavenode_simple",
-      "hosts" : [{% for node in groups['slave-nodes']|sort %}{% if groups['master-nodes']|length == 2 %}{% if not loop.first %}
+      "hosts" : [{% for node in groups['slave-nodes'] %}{% if groups['master-nodes']|length == 2 %}{% if not loop.first %}
 
         {
           "fqdn" : "{{ hostvars[node]['ansible_fqdn'] | lower }}"
@@ -48,11 +48,9 @@
     {
       "name" : "masternode_2",
       "hosts" : [
-{% for node in groups['master-nodes']|sort %}{% if loop.index == 2 %}
         {
-          "fqdn" : "{{ hostvars[node]['ansible_fqdn'] | lower }}"
+          "fqdn" : "{{ hostvars[groups['master-nodes'][1]]['ansible_fqdn'] | lower }}"
         }
-{% endif %}{% endfor %}
       ]
     },
     {% endif -%}
@@ -61,7 +59,7 @@
       "name" : "masternode_3",
       "hosts" : [
         {
-          "fqdn" : "{{ hostvars[groups['ambari-node'][0]]['ansible_fqdn'] | lower }}"
+          "fqdn" : "{{ hostvars[groups['master-nodes'][2]]['ansible_fqdn'] | lower }}"
         }
       ]
     },
@@ -69,7 +67,7 @@
     {% if 'edge-nodes' in groups and groups['edge-nodes']|length > 0 -%}
     {
       "name" : "edgenode",
-      "hosts" : [{% for node in groups['edge-nodes']|sort %}
+      "hosts" : [{% for node in groups['edge-nodes'] %}
 
         {
           "fqdn" : "{{ hostvars[node]['ansible_fqdn'] | lower }}"
@@ -84,7 +82,7 @@
       "name" : "slavenode_zookeeper",
       "hosts" : [
         {
-          "fqdn" : "{{ hostvars[groups['slave-nodes']|sort|first]['ansible_fqdn'] | lower }}"
+          "fqdn" : "{{ hostvars[groups['slave-nodes'][0]]['ansible_fqdn'] | lower }}"
         }
       ]
     },
@@ -93,7 +91,7 @@
       "name" : "masternode_1",
       "hosts" : [
         {
-          "fqdn" : "{{ hostvars[groups['master-nodes']|sort|first]['ansible_fqdn'] | lower }}"
+          "fqdn" : "{{ hostvars[groups['master-nodes'][0]]['ansible_fqdn'] | lower }}"
         }
       ]
     }
