@@ -20,7 +20,7 @@ install_nifi: false
 install_solr: false
 tachyon_service: false
 custom_blueprint: false
-ambari_blueprint_recommendation_strategy: 'ALWAYS_APPLY'
+ambari_blueprint_recommendation_strategy: 'ONLY_STACK_DEFAULTS_APPLY'
 admin_password: 'admin'
 services_password: 'AsdQwe123'
 alerts_contact: 'root@localhost.localdomain'
