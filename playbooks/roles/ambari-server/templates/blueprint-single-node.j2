@@ -2,6 +2,10 @@
   "configurations" : [
     {
       "core-site": {
+        "hadoop.proxyuser.root.hosts" : "{{ hostvars[groups['ambari-node'][0]]['ansible_fqdn'] | lower }}",
+        "hadoop.proxyuser.root.groups" : "users",
+        "hadoop.proxyuser.HTTP.hosts" : "{{ hostvars[groups['ambari-node'][0]]['ansible_fqdn'] | lower }}",
+        "hadoop.proxyuser.HTTP.groups" : "users",
         "hadoop.proxyuser.hcat.groups" : "*",
         "hadoop.proxyuser.hcat.hosts" : "*",
         "hadoop.proxyuser.hue.groups" : "*",
