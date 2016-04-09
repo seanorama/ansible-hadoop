@@ -35,6 +35,10 @@
   yum: name=git state=latest
   when: tech_preview
 
+- name: Install patch for tech_preview
+  yum: name=patch state=latest
+  when: tech_preview
+
 - name: Get NiFi Service
   git: repo=https://github.com/abajwa-hw/ambari-nifi-service.git dest=/var/lib/ambari-server/resources/stacks/HDP/{{ hdp_version }}/services/NIFI/ force=yes
   when: tech_preview
@@ -48,19 +52,21 @@
   when: tech_preview
 
 - name: Patch service order for Zeppelin
-  lineinfile: dest:/var/lib/ambari-server/resources/stacks/HDP/{{ hdp_version }}/role_command_order.json
-              insertafter: '^    "_comment" : "dependencies for all cases",'
-              line: '    "ZEPPELIN_MASTER-START": ["NAMENODE-START", "DATANODE-START"],'
-              state: present
-              backup: yes
+  lineinfile: >
+              dest=/var/lib/ambari-server/resources/stacks/HDP/{{ hdp_version }}/role_command_order.json
+              insertafter='^    "_comment" : "dependencies for all cases",'
+              line='    "ZEPPELIN_MASTER-START": ["NAMENODE-START", "DATANODE-START"],'
+              state=present
+              backup=yes
   when: tech_preview
 
 - name: Patch service order for Solr
-  lineinfile: dest:/var/lib/ambari-server/resources/stacks/HDP/{{ hdp_version }}/role_command_order.json
-              insertafter: '^    "_comment" : "dependencies for all cases",'
-              line: '    "SOLR-START" : ["ZOOKEEPER_SERVER-START"],'
-              state: present
-              backup: yes
+  lineinfile: >
+              dest=/var/lib/ambari-server/resources/stacks/HDP/{{ hdp_version }}/role_command_order.json
+              insertafter='^    "_comment" : "dependencies for all cases",'
+              line='    "SOLR-START" : ["ZOOKEEPER_SERVER-START"],'
+              state=present
+              backup=yes
   when: tech_preview
 
 - name: Patch StackAdvisor.py for Solr
