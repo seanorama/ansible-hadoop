@@ -325,9 +325,6 @@
           "name" : "PIG"
         },
         {
-          "name" : "OOZIE_CLIENT"
-        },
-        {
           "name" : "SQOOP"
         },
         {
@@ -354,9 +351,6 @@
         },
         {% endif -%}
         {
-          "name" : "ZOOKEEPER_SERVER"
-        },
-        {
           "name" : "HISTORYSERVER"
         },
         {
@@ -367,9 +361,6 @@
         },
         {
           "name" : "APP_TIMELINE_SERVER"
-        },
-        {
-          "name" : "METRICS_COLLECTOR"
         },
         {
           "name" : "RESOURCEMANAGER"
@@ -389,9 +380,14 @@
         {
           "name" : "NAMENODE"
         },
+        {% if install_oozie == true -%}
+        {
+          "name" : "OOZIE_CLIENT"
+        },
         {
           "name" : "OOZIE_SERVER"
         },
+        {% endif -%}
         {
           "name" : "NODEMANAGER"
         },
@@ -487,8 +483,16 @@
           "name" : "FALCON_CLIENT"
         },
         {% endif -%}
+        {% if install_ams == true -%}
+        {
+          "name" : "METRICS_COLLECTOR"
+        },
         {
           "name" : "METRICS_MONITOR"
+        },
+        {% endif -%}
+        {
+          "name" : "ZOOKEEPER_SERVER"
         }
       ],
       "cardinality" : "1"
