@@ -8,6 +8,17 @@
         "hadoop.proxyuser.hue.hosts" : "*"
       }
     },
+    { "solr-config": {
+        "solr.download.location": "HDPSEARCH",
+        "solr.znode": "/solr",
+        "solr.cloudmode": "true"
+      }
+    },
+    { "zeppelin-ambari-config": {
+        "zeppelin.executor.mem": "512m",
+        "zeppelin.executor.instances": "2"
+      }
+    },
     {% if ansible_memtotal_mb > 59000 -%}
     {
       "ams-hbase-env" : {

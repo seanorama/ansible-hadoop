@@ -14,6 +14,10 @@ install_storm: true
 install_slider: true
 install_kafka: true
 install_falcon: true
+tech_preview: false
+install_zeppelin: false
+install_nifi: false
+install_solr: false
 tachyon_service: false
 custom_blueprint: false
 ambari_blueprint_recommendation_strategy: 'ALWAYS_APPLY'

@@ -1,0 +1,19 @@
+--- stack_advisor.orig.py	2015-12-20 23:31:21.000000000 +0000
++++ stack_advisor.py	2016-02-09 12:02:52.755196680 +0000
+@@ -1259,7 +1259,7 @@ class HDP206StackAdvisor(DefaultStackAdv
+     return self.toConfigurationValidationProblems(validationItems, "hadoop-env")
+
+   def getMastersWithMultipleInstances(self):
+-    return ['ZOOKEEPER_SERVER', 'HBASE_MASTER']
++    return ['ZOOKEEPER_SERVER', 'HBASE_MASTER', 'SOLR_MASTER']
+
+   def getNotValuableComponents(self):
+     return ['JOURNALNODE', 'ZKFC', 'GANGLIA_MONITOR']
+@@ -1271,6 +1271,7 @@ class HDP206StackAdvisor(DefaultStackAdv
+     return {
+       'ZOOKEEPER_SERVER': {"min": 3},
+       'HBASE_MASTER': {"min": 1},
++      'SOLR_MASTER': {"min": 3},
+       }
+
+   def getComponentLayoutSchemes(self):
