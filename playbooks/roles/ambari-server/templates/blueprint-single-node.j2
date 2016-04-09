@@ -459,6 +459,21 @@
           "name" : "NIMBUS"
         },
         {% endif -%}
+        {% if install_solr == true and tech_preview == true -%}
+        {
+          "name" : "SOLR_MASTER"
+        },
+        {% endif -%}
+        {% if install_nifi == true and tech_preview == true -%}
+        {
+          "name" : "NIFI_MASTER"
+        },
+        {% endif -%}
+        {% if install_zeppelin == true and tech_preview == true -%}
+        {
+          "name" : "ZEPPELIN_MASTER"
+        },
+        {% endif -%}
         {% if install_kafka == true -%}
         {
           "name" : "KAFKA_BROKER"
