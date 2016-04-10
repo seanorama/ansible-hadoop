@@ -305,6 +305,7 @@
         "hive.txn.manager": "org.apache.hadoop.hive.ql.lockmgr.DbTxnManager",
         "hive.compactor.initiator.on": "true",
         "hive.compactor.worker.threads": "1",
+        "hive.server2.tez.initialize.default.sessions": "true",
         {% if ansible_memtotal_mb > 119000 -%}
         "hive.tez.container.size" : "8192",
         {% elif ansible_memtotal_mb > 59000 -%}
