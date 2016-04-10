@@ -1,4 +1,6 @@
 packages:
+  - snappy
+  - snappy-devel
   - python-simplejson
   - python-httplib2
   - man

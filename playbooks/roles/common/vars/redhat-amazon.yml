@@ -1,4 +1,6 @@
 packages:
+  - snappy
+  - snappy-devel
   - python-simplejson
   - python26-httplib2
   - python27-httplib2
