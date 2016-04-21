@@ -13,8 +13,8 @@
   get_url: url={{ ambari_repo }} dest={{ ambari_repo_file }}
 
 - name: Get HDP repo urlinfo
-    uri: url="http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json" return_content=yes
-    register: json_response
+  uri: url="http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json" return_content=yes
+  register: json_response
 
 - debug: msg="Success - tag defined =>{{  (json_response.content|from_json)['HDP-2.4']['latest']['centos7'] }}<="
     when:  (json_response.content|from_json)['HDP-2.4']['latest']['centos7']  is defined
