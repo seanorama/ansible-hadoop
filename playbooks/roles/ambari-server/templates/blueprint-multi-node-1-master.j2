@@ -356,9 +356,6 @@
           "name" : "HIVE_CLIENT"
         },
         {
-          "name" : "HDFS_CLIENT"
-        },
-        {
           "name" : "YARN_CLIENT"
         },
         {
@@ -423,13 +420,16 @@
         {% if install_hbase == true -%}
         {
           "name" : "HBASE_REGIONSERVER"
-        }
+        },
         {% endif -%}
         {% if install_ams == true -%}
-        ,{
+        {
           "name" : "METRICS_MONITOR"
-        }
+        },
         {% endif -%}
+        {
+          "name" : "HDFS_CLIENT"
+        }
       ],
       "cardinality" : "{{ groups['slave-nodes']|length }}"
     },
@@ -454,9 +454,6 @@
         },
         {
           "name" : "HIVE_CLIENT"
-        },
-        {
-          "name" : "HDFS_CLIENT"
         },
         {
           "name" : "YARN_CLIENT"
@@ -511,13 +508,16 @@
         {% if install_falcon == true -%}
         {
           "name" : "FALCON_CLIENT"
-        }
+        },
         {% endif -%}
         {% if install_ams == true -%}
-        ,{
+        {
           "name" : "METRICS_MONITOR"
-        }
+        },
         {% endif -%}
+        {
+          "name" : "HDFS_CLIENT"
+        }
       ],
       "cardinality" : "{{ groups['edge-nodes']|length }}"
     },
@@ -542,9 +542,6 @@
         },
         {
           "name" : "HIVE_CLIENT"
-        },
-        {
-          "name" : "HDFS_CLIENT"
         },
         {
           "name" : "YARN_CLIENT"
@@ -692,13 +689,16 @@
         },
         {
           "name" : "FALCON_CLIENT"
-        }
+        },
         {% endif -%}
         {% if install_ams == true -%}
-        ,{
+        {
           "name" : "METRICS_MONITOR"
-        }
+        },
         {% endif -%}
+        {
+          "name" : "HDFS_CLIENT"
+        }
       ],
       "cardinality" : "1"
     }
