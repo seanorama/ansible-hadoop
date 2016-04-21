@@ -20,7 +20,7 @@
   when:  (json_response.content|from_json)['HDP-2.4']['latest']['centos7']  is defined
 
 - name: Download the HDP repo
-  get_url: url={{ (json_response.content|from_json)['HDP-2.4']['latest']['centos7'] }}/hdp.repo dest=/etc/yum.repos.d/HDP.test
+  get_url: url={{ (json_response.content|from_json)['HDP-2.4']['latest']['centos7'] }}hdp.repo dest=/etc/yum.repos.d/HDP.test
 
 - name: Add apt key
   apt_key: keyserver=keyserver.ubuntu.com id={{ ambari_repo_key }}
