@@ -18,6 +18,21 @@
         "hadoop.proxyuser.hue.hosts" : "*"
       }
     },
+    {% if install_solr == true and tech_preview == true -%}
+    { "solr-config": {
+        "solr.download.location": "HDPSEARCH",
+        "solr.znode": "/solr",
+        "solr.cloudmode": "true"
+      }
+    },
+    {% endif -%}
+    {% if install_zeppelin == true and tech_preview == true -%}
+    { "zeppelin-ambari-config": {
+        "zeppelin.executor.mem": "512m",
+        "zeppelin.executor.instances": "2"
+      }
+    },
+    {% endif -%}
     {% if hostvars[groups['master-nodes'][0]]['ansible_memtotal_mb'] > 24000 -%}
     {
       "ams-hbase-env" : {
@@ -450,11 +465,13 @@
         {% if install_kafka == true -%}
         {
           "name" : "KAFKA_BROKER"
-        },
+        }
         {% endif -%}
-        {
+        {% if install_ams == true -%}
+        ,{
           "name" : "METRICS_MONITOR"
         }
+        {% endif -%}
       ],
       "cardinality" : "1"
     },
@@ -469,8 +486,10 @@
           "name" : "PIG"
         },
         {
+        {% if install_oozie == true -%}
           "name" : "OOZIE_CLIENT"
         },
+        {% endif -%}
         {
           "name" : "SQOOP"
         },
@@ -545,11 +564,13 @@
         {% if install_hbase == true -%}
         {
           "name" : "HBASE_REGIONSERVER"
-        },
+        }
         {% endif -%}
-        {
+        {% if install_ams == true -%}
+        ,{
           "name" : "METRICS_MONITOR"
         }
+        {% endif -%}
       ],
       "cardinality" : "{{ groups['slave-nodes']|length }}"
     },
@@ -563,9 +584,11 @@
         {
           "name" : "PIG"
         },
+        {% if install_oozie == true -%}
         {
           "name" : "OOZIE_CLIENT"
         },
+        {% endif -%}
         {
           "name" : "SQOOP"
         },
@@ -611,17 +634,36 @@
           "name" : "HST_SERVER"
         },
         {% endif -%}
+        {% if install_solr == true and tech_preview == true -%}
+        {
+          "name" : "SOLR_MASTER"
+        },
+        {% endif -%}
+        {% if install_nifi == true and tech_preview == true -%}
+        {
+          "name" : "NIFI_MASTER"
+        },
+        {% endif -%}
+        {% if install_zeppelin == true and tech_preview == true -%}
+        {
+          "name" : "ZEPPELIN_MASTER"
+        },
+        {% endif -%}
+        {% if install_ams == true -%}
         {
           "name" : "METRICS_COLLECTOR"
         },
+        {% endif -%}
         {% if hdfs.ha_namenode -%}
         {
           "name" : "JOURNALNODE"
         },
         {% endif -%}
+        {% if install_oozie == true -%}
         {
           "name" : "OOZIE_SERVER"
         },
+        {% endif -%}
         {% if install_flume == true -%}
         {
           "name" : "FLUME_HANDLER"
@@ -663,11 +705,13 @@
         },
         {
           "name" : "FALCON_CLIENT"
-        },
+        }
         {% endif -%}
-        {
+        {% if install_ams == true -%}
+        ,{
           "name" : "METRICS_MONITOR"
         }
+        {% endif -%}
       ],
       "cardinality" : "1"
     },
@@ -747,11 +791,13 @@
         {% if install_falcon == true -%}
         {
           "name" : "FALCON_CLIENT"
-        },
+        }
         {% endif -%}
-        {
+        {% if install_ams == true -%}
+        ,{
           "name" : "METRICS_MONITOR"
         }
+        {% endif -%}
       ],
       "cardinality" : "{{ groups['edge-nodes']|length }}"
     },
@@ -856,11 +902,13 @@
         },
         {
           "name" : "HBASE_MASTER"
-        },
+        }
         {% endif -%}
-        {
+        {% if install_ams == true -%}
+        ,{
           "name" : "METRICS_MONITOR"
         }
+        {% endif -%}
       ],
       "cardinality" : "1"
     }
