@@ -21,6 +21,7 @@ install_zeppelin: false
 install_nifi: false
 install_solr: false
 tachyon_service: false
+blueprint_name: 'cluster_blueprint'
 custom_blueprint: false
 ambari_blueprint_recommendation_strategy: 'ONLY_STACK_DEFAULTS_APPLY'
 admin_password: 'admin'
