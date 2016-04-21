@@ -1,4 +1,5 @@
 packages:
+  - patch
   - snappy
   - snappy-devel
   - python-simplejson
