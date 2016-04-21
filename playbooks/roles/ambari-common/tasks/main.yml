@@ -31,7 +31,7 @@
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 - name: Cache Ambari and dependant packages
-  raw: time yum -y install $(yum list all | awk '$3 ~ /HDP-2.4/ {print $1}' | grep "^hadoop")
+  raw: time yum -y install $(yum list all | awk '$3 ~ /HDP-2.4/ {print $1}' | grep -E "^(hadoop|hive|tez|zookeeper|sqoop|spark|pig|oozie)")
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 - name: Remove HDP repo
