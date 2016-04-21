@@ -1,3 +1,2 @@
-ambari_repo: "http://dev.hortonworks.com.s3.amazonaws.com/ambari/centos{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }}/ambaribn.repo"
-#ambari_repo: "https://gist.githubusercontent.com/seanorama/895ac973e5fd4cf28343e12251a238b1/raw/6e51904bc76a14097750f88b7ac31f04426830fc/ambari.repo"
+ambari_repo: "http://public-repo-1.hortonworks.com/ambari/centos{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }}/ambari.repo"
 ambari_repo_file: "/etc/yum.repos.d/ambari.repo"
