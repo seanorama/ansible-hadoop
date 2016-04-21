@@ -346,14 +346,19 @@
     },
     {% endif -%}
     {
+      "hive-env" : {
+        "hive_txn_acid" : "on"
+      }
+    },
+    {
       "hive-site" : {
-        {% if hostvars[groups['slave-nodes'][0]]['ansible_memtotal_mb'] > 119000 -%}
-        "hive.tez.container.size" : "8192",
-        {% elif hostvars[groups['slave-nodes'][0]]['ansible_memtotal_mb'] > 59000 -%}
-        "hive.tez.container.size" : "4096",
-        {% elif hostvars[groups['slave-nodes'][0]]['ansible_memtotal_mb'] > 24000 -%}
-        "hive.tez.container.size" : "2048",
-        {% endif -%}
+        "hive.support.concurrency": "true",
+        "hive.enforce.bucketing": "true",
+        "hive.exec.dynamic.partition.mode": "nonstrict",
+        "hive.txn.manager": "org.apache.hadoop.hive.ql.lockmgr.DbTxnManager",
+        "hive.compactor.initiator.on": "true",
+        "hive.compactor.worker.threads": "1",
+        "hive.server2.tez.initialize.default.sessions": "true",
         "fs.file.impl.disable.cache" : "true",
         "fs.hdfs.impl.disable.cache" : "true",
         "javax.jdo.option.ConnectionPassword" : "{{ services_password }}"
@@ -370,9 +375,6 @@
         },
         {
           "name" : "PIG"
-        },
-        {
-          "name" : "OOZIE_CLIENT"
         },
         {
           "name" : "SQOOP"
@@ -392,6 +394,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_oozie == true -%}
+        {
+          "name" : "OOZIE_CLIENT"
+        },
+        {% endif -%}
         {% if install_falcon == true -%}
         {
           "name" : "FALCON_CLIENT"
@@ -486,11 +493,6 @@
           "name" : "PIG"
         },
         {
-        {% if install_oozie == true -%}
-          "name" : "OOZIE_CLIENT"
-        },
-        {% endif -%}
-        {
           "name" : "SQOOP"
         },
         {
@@ -508,6 +510,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_oozie == true -%}
+        {
+          "name" : "OOZIE_CLIENT"
+        },
+        {% endif -%}
         {% if install_smartsense == true -%}
         {
           "name" : "HST_AGENT"
@@ -584,11 +591,6 @@
         {
           "name" : "PIG"
         },
-        {% if install_oozie == true -%}
-        {
-          "name" : "OOZIE_CLIENT"
-        },
-        {% endif -%}
         {
           "name" : "SQOOP"
         },
@@ -607,6 +609,14 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_oozie == true -%}
+        {
+          "name" : "OOZIE_CLIENT"
+        },
+        {
+          "name" : "OOZIE_SERVER"
+        },
+        {% endif -%}
         {% if install_slider == true -%}
         {
           "name" : "SLIDER"
@@ -654,11 +664,6 @@
         {% if hdfs.ha_namenode -%}
         {
           "name" : "JOURNALNODE"
-        },
-        {% endif -%}
-        {% if install_oozie == true -%}
-        {
-          "name" : "OOZIE_SERVER"
         },
         {% endif -%}
         {% if install_flume == true -%}
@@ -818,9 +823,6 @@
           "name" : "PIG"
         },
         {
-          "name" : "OOZIE_CLIENT"
-        },
-        {
           "name" : "SQOOP"
         },
         {
@@ -838,6 +840,11 @@
         {
           "name" : "TEZ_CLIENT"
         },
+        {% if install_oozie == true -%}
+        {
+          "name" : "OOZIE_CLIENT"
+        },
+        {% endif -%}
         {% if install_falcon == true -%}
         {
           "name" : "FALCON_CLIENT"
