@@ -39,3 +39,6 @@ networking_eth: "redhat-ifcfg-eth.j2"
 networking_bond: "redhat-ifcfg-bond.j2"
 
 java_version: 8
+
+ansible_distribution_major_version: 6
+
