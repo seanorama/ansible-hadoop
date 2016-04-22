@@ -493,6 +493,14 @@
           "name" : "FALCON_CLIENT"
         },
         {% endif -%}
+        {% if install_smartsense == true -%}
+        {
+          "name" : "HST_AGENT"
+        },
+        {
+          "name" : "HST_SERVER"
+        },
+        {% endif -%}
         {% if install_ams == true -%}
         {
           "name" : "METRICS_COLLECTOR"
