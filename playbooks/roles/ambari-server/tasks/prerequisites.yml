@@ -73,6 +73,7 @@
   patch: >
     src=add-solrmaster-to-stackadvisor.patch
     dest=/var/lib/ambari-server/resources/stacks/HDP/2.0.6/services/stack_advisor.py
+  when: tech_preview
 
 - name: Make sure ambari-server is running
   service: name=ambari-server state=started enabled=yes
