@@ -27,6 +27,8 @@
       }
     },
     {% endif -%}
+
+{#
     {% if ansible_memtotal_mb > 59000 -%}
     {
       "ams-hbase-env" : {
@@ -50,6 +52,7 @@
       }
     },
     {% endif -%}
+#}
     {
       "hdfs-site" : {
         "dfs.namenode.name.dir" : "{% for disk in ansible_mounts if disk.mount | match("/grid/*") %}{{ disk.mount }}/hadoop/hdfs/nn{% if not loop.last %},{% endif %}{% else %}/hadoop/hdfs/nn{%- endfor %}",
@@ -63,6 +66,8 @@
         "dfs.replication" : "1"
       }
     },
+
+{#
     {% if ansible_memtotal_mb > 119000 -%}
     {
       "yarn-site" : {
@@ -208,6 +213,8 @@
         }
     },
     {% endif -%}
+#}
+
     {
       "kafka-broker" : {
         "log.dirs" : "/hadoop/kafka-logs"
@@ -310,6 +317,7 @@
         "hive.compactor.initiator.on": "true",
         "hive.compactor.worker.threads": "1",
         "hive.server2.tez.initialize.default.sessions": "true",
+        {#
         {% if ansible_memtotal_mb > 119000 -%}
         "hive.tez.container.size" : "8192",
         {% elif ansible_memtotal_mb > 59000 -%}
@@ -317,6 +325,7 @@
         {% elif ansible_memtotal_mb > 24000 -%}
         "hive.tez.container.size" : "2048",
         {% endif -%}
+        #}
         "fs.file.impl.disable.cache" : "true",
         "fs.hdfs.impl.disable.cache" : "true",
         "javax.jdo.option.ConnectionPassword" : "{{ services_password }}"
