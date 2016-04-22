@@ -38,6 +38,9 @@
   apt: upgrade=dist
   when: ansible_os_family == "Debian" and "{{ packages|length > 0 }}"
 
+- name: Ensure /etc/selinux/config exists
+  file: path=/etc/selinux/config state=touch
+
 - name: Make sure SeLinux is disabled (RHEL)
   selinux: state=disabled
   when: ansible_os_family == "RedHat"
