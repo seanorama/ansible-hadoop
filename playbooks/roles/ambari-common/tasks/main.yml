@@ -14,6 +14,10 @@
   get_url: url={{ ambari_repo }}/ambaribn.repo dest={{ ambari_repo_file }}
   ignore_errors: yes
 
+- name: Add YUM gpgkey
+  rpm_key: state=present key={{ ambari_repo_gpgkey }}
+  when: ansible_os_family == "RedHat"
+
 - name: Add apt key
   apt_key: keyserver=keyserver.ubuntu.com id={{ ambari_repo_key }}
   when: ansible_os_family == "Debian"
