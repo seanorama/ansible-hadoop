@@ -24,16 +24,12 @@
   raw: time yum -y install --downloadonly $(yum list available | awk '$3 ~ /ambari/ {print $1}') java-1.8.0-openjdk-devel
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
-- name: Install OpenJDK
-  raw: yum -y install java-1.8.0-openjdk-devel
-  when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
-
 - name: Download the HDP repo
   get_url: url={{ (json_response.content|from_json)['HDP-{{ hdp_version }}']['latest']['centos-{{ ansible_distribution|lower }}'] }}hdp.repo dest=/etc/yum.repos.d/HDP.repo
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
-- name: Pre-install HDP packages
-  raw: yum -y install $(yum list available | awk '$3~/HDP-[1-9]/ && $1~/^(falcon|hadoop|hadooplzo|hive|oozie|pig|spark|sqoop|tez|zookeeper)_[0-9]_[0-9]/ {print $1}')
+- name: Pre-install packages
+  raw: yum -y install java-1.8.0-openjdk-devel smartsense-hst $(yum list available | awk '$3~/HDP-[1-9]/ && $1~/^(falcon|hadoop|hadooplzo|hive|oozie|pig|spark|sqoop|tez|zookeeper)_[0-9]_[0-9]/ {print $1}')
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 #- name: Remove HDP repo
