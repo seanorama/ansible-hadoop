@@ -46,6 +46,10 @@
   raw: yum -y install smartsense-hst $(yum list available | awk '$3~/HDP-[1-9]/ && $1~/^(falcon|hadoop|hadooplzo|hive|oozie|pig|spark|sqoop|tez|zookeeper)_[0-9]_[0-9]/ {print $1}')
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
+#- name: Backup HDP repo before remove
+  #copy: remote_src=True src=/etc/yum.repos.d/HDP.repo dest=/etc/yum.repos.d/HDP.repo.orig
+
 #- name: Remove HDP repo
   #file: path=/etc/yum.repos.d/HDP.repo state=absent
   #when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
+
