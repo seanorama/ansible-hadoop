@@ -21,7 +21,7 @@
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 - name: Get HDP repo urlinfo
-  uri: url="http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json" return_content=yes
+  uri: url="http://{{ ambari_repo_host }}/HDP/hdp_urlinfo.json" return_content=yes
   register: json_response
   when: hdp_repo is not defined and cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
