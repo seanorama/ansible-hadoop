@@ -1,2 +1,2 @@
-ambari_repo: "http://{{ ambari_repo_host }}/ambari/centos{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }}/ambari.repo"
+ambari_repo: "http://{{ ambari_repo_host }}/ambari/centos{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }}/ambaribn.repo"
 ambari_repo_file: "/etc/yum.repos.d/ambari.repo"
