@@ -10,7 +10,7 @@
         - ../vars
 
 - name: Download the Ambari repo
-  get_url: url={{ ambari_repo }} dest={{ ambari_repo_file }}
+  get_url: url={{ ambari_repo }} dest={{ ambari_repo_file }} force=yes backup=yes
 
 - name: Add YUM gpgkey
   rpm_key: state=present key={{ ambari_repo_gpgkey }}
@@ -43,7 +43,7 @@
 - debug: var=hdp_repo
 
 - name: Download the HDP repo
-  get_url: url={{ hdp_repo }} dest=/etc/yum.repos.d/HDP.repo
+  get_url: url={{ hdp_repo }} dest=/etc/yum.repos.d/HDP.repo force=yes backup=yes
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 - name: Pre-install HDP packages
