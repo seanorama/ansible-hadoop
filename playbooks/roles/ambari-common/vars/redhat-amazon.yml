@@ -1,4 +1,4 @@
 ansible_distribution_major_version: 6
 
-ambari_repo: "http://{{ ambari_repo_host }}/ambari/centos6/2.x/updates/{{ ambari_version }}/ambari.repo"
+ambari_repo: "http://{{ ambari_repo_host }}/ambari/centos6/2.x/updates/{{ ambari_version }}"
 ambari_repo_file: "/etc/yum.repos.d/ambari.repo"
