@@ -24,6 +24,9 @@
   raw: time yum -y install --downloadonly ambari-agent $(yum list available | awk '$3 ~ /ambari/ {print $1}')
   when: cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
+- set_fact:
+    hdp_repo="https://gist.githubusercontent.com/seanorama/907711fa7a8bccb9f51ed482576009cd/raw/4d293df93ff303c8919c5c664e536c1ffb149aee/HDP.repo"
+
 - name: Get HDP repo urlinfo
   uri: url="http://{{ ambari_repo_host }}/HDP/hdp_urlinfo.json" return_content=yes
   register: json_response
@@ -31,13 +34,13 @@
 
 - name: Set facts for HDP repo URL
   set_fact:
-    hdp_repo_name="HDP-{{ hdp_version }}"
+    hdp_repoid="HDP-{{ hdp_version }}"
     hdp_os="centos{{ ansible_distribution_major_version }}"
   when: hdp_repo is not defined and cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 - name: Set hdp_repo URL
   set_fact:
-    hdp_repo="{{ (json_response.content|from_json)[hdp_repo_name]['latest'][hdp_os] }}hdp.repo"
+    hdp_repo="{{ (json_response.content|from_json)[hdp_repoid]['latest'][hdp_os] }}hdp.repo"
   when: hdp_repo is not defined and cache_packages is defined and cache_packages and ansible_os_family == "RedHat"
 
 - debug: var=hdp_repo
