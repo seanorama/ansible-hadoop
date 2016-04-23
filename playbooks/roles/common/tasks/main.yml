@@ -198,9 +198,9 @@
   with_indexed_items: "{{ datanode_disks|default([]) }}"
   when: datanode_disks is defined and datanode_disks and ansible_devices[item.1] is defined
 
-- name: Cluster Usability: add 'users' group
+- name: Hadoop usability. Add 'users' group
   group: name=users state=present system=yes
 
-- name: Cluster Usability: add 'admin' user
+- name: Hadoop usability. Add 'admin' user
   user: name=admin groups=users append=yes
 
